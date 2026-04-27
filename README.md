@@ -18,6 +18,7 @@
 git clone https://github.com/20AntonioBanderas03/CourseWorkOOP.git
 cd CourseWorkOOP
 ./mvnw javafx:run
+```
 Структура проекта
 text
 src/main/java/rsatu/ru/cw/
