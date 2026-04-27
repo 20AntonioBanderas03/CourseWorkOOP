@@ -20,7 +20,7 @@ cd CourseWorkOOP
 ./mvnw javafx:run
 ```
 Структура проекта
-text
+```text
 src/main/java/rsatu/ru/cw/
 ├── RentApplication.java   # точка входа
 ├── RentController.java    # контроллер
@@ -31,6 +31,7 @@ src/main/java/rsatu/ru/cw/
 ├── NormativeService.java  # услуга по нормативу
 ├── MeteredService.java    # услуга по счётчику
 └── Meter.java             # обобщённый счётчик
+```
 Технологии
 Java 17
 
