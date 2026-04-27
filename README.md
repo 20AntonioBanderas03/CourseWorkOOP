@@ -33,6 +33,7 @@ src/main/java/rsatu/ru/cw/
 └── Meter.java             # обобщённый счётчик
 ```
 ## Технологии
+
 Java 17
 JavaFX 21
 Maven
