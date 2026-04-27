@@ -35,7 +35,10 @@ src/main/java/rsatu/ru/cw/
 ## Технологии
 
 Java 17
+
 JavaFX 21
+
 Maven
+
 ## Автор
 @20AntonioBanderas03
