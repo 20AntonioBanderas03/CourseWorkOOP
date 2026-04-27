@@ -19,7 +19,7 @@ git clone https://github.com/20AntonioBanderas03/CourseWorkOOP.git
 cd CourseWorkOOP
 ./mvnw javafx:run
 ```
-Структура проекта
+## Структура проекта
 ```text
 src/main/java/rsatu/ru/cw/
 ├── RentApplication.java   # точка входа
@@ -32,12 +32,9 @@ src/main/java/rsatu/ru/cw/
 ├── MeteredService.java    # услуга по счётчику
 └── Meter.java             # обобщённый счётчик
 ```
-Технологии
+## Технологии
 Java 17
-
 JavaFX 21
-
 Maven
-
-Автор
+## Автор
 @20AntonioBanderas03
