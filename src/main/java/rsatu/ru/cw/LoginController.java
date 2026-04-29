@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 public class LoginController {
@@ -112,5 +113,18 @@ public class LoginController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    // В методе initialize() или register() добавить создание тестовых квартир
+
+    private void initTestApartments() {
+        // Добавляем тестовые квартиры, если их нет
+        if (dataService.getApartments().isEmpty()) {
+            dataService.saveApartment(new Apartment(1, 45.5, 3, "Иванов Иван Иванович"));
+            dataService.saveApartment(new Apartment(2, 68.2, 2, "Петров Петр Петрович"));
+
+            dataService.saveAccount(new PersonalAccount(1, BigDecimal.ZERO));
+            dataService.saveAccount(new PersonalAccount(2, BigDecimal.ZERO));
+        }
     }
 }

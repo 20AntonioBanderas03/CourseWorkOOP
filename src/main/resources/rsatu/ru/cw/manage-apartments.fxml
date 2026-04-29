@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="rsatu.ru.cw.ManageApartmentsController">
+
+    <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+
+    <Label text="Управление квартирами" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <!-- Таблица квартир -->
+    <TableView fx:id="apartmentTable" prefHeight="250">
+        <columns>
+            <TableColumn fx:id="colNumber" text="№ квартиры" prefWidth="80"/>
+            <TableColumn fx:id="colArea" text="Площадь (кв.м)" prefWidth="100"/>
+            <TableColumn fx:id="colResidents" text="Жильцов" prefWidth="80"/>
+            <TableColumn fx:id="colOwner" text="Владелец" prefWidth="200"/>
+            <TableColumn fx:id="colDebt" text="Долг/Переплата" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="Обновить" onAction="#handleRefresh"/>
+        <Button text="Добавить" onAction="#handleAddApartment"/>
+        <Button text="Редактировать" onAction="#handleEditApartment"/>
+        <Button text="Удалить" onAction="#handleDeleteApartment"/>
+    </HBox>
+
+    <Separator/>
+
+    <Label text="Данные квартиры" style="-fx-font-weight: bold;"/>
+    <GridPane hgap="10" vgap="10">
+        <Label text="Номер квартиры:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="numberField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Площадь (кв.м):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="areaField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Количество жильцов:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="residentsField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="ФИО владельца:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="ownerField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <HBox spacing="10" GridPane.rowIndex="4" GridPane.columnSpan="2">
+            <Button text="Сохранить" onAction="#handleSave"/>
+            <Button text="Очистить" onAction="#handleClear"/>
+        </HBox>
+    </GridPane>
+
+    <Label fx:id="statusLabel" style="-fx-text-fill: green;"/>
+</VBox>

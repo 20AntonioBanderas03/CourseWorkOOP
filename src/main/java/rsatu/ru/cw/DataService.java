@@ -142,4 +142,32 @@ public class DataService {
     public Optional<PersonalAccount> findAccountByApartmentId(int apartmentId) {
         return getAccounts().stream().filter(a -> a.getApartmentId() == apartmentId).findFirst();
     }
+
+    // Добавить эти методы в класс DataService
+
+    public void updateApartment(int number, double area, int residentsCount, String ownerName) {
+        List<Apartment> apartments = getApartments();
+        for (int i = 0; i < apartments.size(); i++) {
+            if (apartments.get(i).getNumber() == number) {
+                apartments.set(i, new Apartment(number, area, residentsCount, ownerName));
+                break;
+            }
+        }
+        data.put("apartments", apartments);
+        saveData();
+    }
+
+    public void deleteApartment(int number) {
+        List<Apartment> apartments = getApartments();
+        apartments.removeIf(a -> a.getNumber() == number);
+        data.put("apartments", apartments);
+        saveData();
+    }
+
+    public void deleteAccount(int apartmentId) {
+        List<PersonalAccount> accounts = getAccounts();
+        accounts.removeIf(a -> a.getApartmentId() == apartmentId);
+        data.put("accounts", accounts);
+        saveData();
+    }
 }

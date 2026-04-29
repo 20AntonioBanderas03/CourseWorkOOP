@@ -1,6 +1,6 @@
 {
-  "nextApartmentId": 4,
-  "nextUserId": 3,
+  "nextApartmentId": 6,
+  "nextUserId": 5,
   "accounts": [
     {
       "apartmentId": 2,
@@ -9,21 +9,43 @@
     {
       "apartmentId": 1,
       "debt": -62.15
+    },
+    {
+      "apartmentId": 4,
+      "debt": 2187.9
+    },
+    {
+      "apartmentId": 5,
+      "debt": 2637.90
     }
   ],
   "users": [
     {
-      "id": 1,
+      "id": 1.0,
       "login": "admin",
       "password": "admin",
       "role": "ADMIN"
     },
     {
-      "id": 2,
+      "id": 2.0,
       "login": "admin1",
       "password": "admin1",
       "role": "USER",
-      "apartmentId": 1
+      "apartmentId": 1.0
+    },
+    {
+      "id": 3.0,
+      "login": "admin2",
+      "password": "admin2",
+      "role": "USER",
+      "apartmentId": 2.0
+    },
+    {
+      "id": 4.0,
+      "login": "admin4",
+      "password": "admin4",
+      "role": "USER",
+      "apartmentId": 4.0
     }
   ],
   "apartments": [
@@ -38,6 +60,18 @@
       "area": 68.2,
       "residentsCount": 2.0,
       "ownerName": "Петров Петр Петрович"
+    },
+    {
+      "number": 4.0,
+      "area": 33.0,
+      "residentsCount": 1.0,
+      "ownerName": "Иванов Иван Альбертович"
+    },
+    {
+      "number": 5.0,
+      "area": 33.0,
+      "residentsCount": 1.0,
+      "ownerName": "Смирнов Иван Николаевич"
     }
   ]
 }

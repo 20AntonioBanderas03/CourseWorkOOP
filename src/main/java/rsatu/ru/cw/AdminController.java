@@ -3,8 +3,11 @@ package rsatu.ru.cw;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -136,5 +139,26 @@ public class AdminController {
         public int getNumber() { return number; }
         public String getOwnerName() { return ownerName; }
         public String getDebtString() { return debtString; }
+    }
+
+    @FXML
+    private void handleManageApartments() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/rsatu/ru/cw/manage-apartments.fxml"));
+            Scene scene = new Scene(loader.load(), 700, 600);
+            ManageApartmentsController controller = loader.getController();
+            controller.setDataService(dataService);
+
+            Stage stage = new Stage();
+            stage.setTitle("Управление квартирами");
+            stage.setScene(scene);
+            stage.showAndWait();
+
+            // После закрытия окна обновляем таблицу
+            loadApartments();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Ошибка", "Не удалось открыть окно управления квартирами: " + e.getMessage());
+        }
     }
 }

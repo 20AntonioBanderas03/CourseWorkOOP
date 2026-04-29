@@ -12,6 +12,11 @@
 
     <Label text="Панель администратора" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
+    <HBox spacing="10">
+        <Button text="Управление квартирами" onAction="#handleManageApartments"/>
+        <Button text="Обновить" onAction="#handleRefresh"/>
+    </HBox>
+
     <TableView fx:id="apartmentTable" prefHeight="200">
         <columns>
             <TableColumn fx:id="colNumber" text="№ квартиры" prefWidth="80"/>
@@ -21,7 +26,6 @@
     </TableView>
 
     <HBox spacing="10" alignment="CENTER_LEFT">
-        <Button text="Обновить" onAction="#handleRefresh"/>
         <Label fx:id="apartmentInfoLabel" text="Выберите квартиру из списка"/>
     </HBox>
 
