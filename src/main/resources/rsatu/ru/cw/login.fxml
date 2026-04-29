@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="rsatu.ru.cw.LoginController">
+
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <Label text="Система расчёта квартплаты" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <TabPane fx:id="tabPane">
+        <Tab text="Вход">
+            <VBox spacing="10">
+                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                <Label text="Логин:"/>
+                <TextField fx:id="loginField"/>
+                <Label text="Пароль:"/>
+                <PasswordField fx:id="passwordField"/>
+                <Button text="Войти" onAction="#handleLogin"/>
+            </VBox>
+        </Tab>
+        <Tab text="Регистрация">
+            <VBox spacing="10">
+                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                <Label text="Логин:"/>
+                <TextField fx:id="regLoginField"/>
+                <Label text="Пароль:"/>
+                <PasswordField fx:id="regPasswordField"/>
+                <Label text="Номер квартиры:"/>
+                <TextField fx:id="regApartmentField"/>
+                <Button text="Зарегистрироваться" onAction="#handleRegister"/>
+            </VBox>
+        </Tab>
+    </TabPane>
+</VBox>

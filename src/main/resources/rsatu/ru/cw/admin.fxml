@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="rsatu.ru.cw.AdminController">
+
+    <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+
+    <Label text="Панель администратора" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="apartmentTable" prefHeight="200">
+        <columns>
+            <TableColumn fx:id="colNumber" text="№ квартиры" prefWidth="80"/>
+            <TableColumn fx:id="colOwner" text="Владелец" prefWidth="200"/>
+            <TableColumn fx:id="colDebt" text="Долг/Переплата" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text="Обновить" onAction="#handleRefresh"/>
+        <Label fx:id="apartmentInfoLabel" text="Выберите квартиру из списка"/>
+    </HBox>
+
+    <TitledPane text="Начисление для выбранной квартиры" expanded="true">
+        <GridPane hgap="10" vgap="10">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            <Label text="Электричество (кВт·ч):" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="electricityReading" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <Label text="Холодная вода (м³):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="waterReading" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <Button text="Начислить" onAction="#handleChargeSelected" GridPane.rowIndex="2" GridPane.columnSpan="2"/>
+        </GridPane>
+    </TitledPane>
+
+    <TitledPane text="Квитанция" expanded="true" VBox.vgrow="ALWAYS">
+        <TextArea fx:id="receiptArea" editable="false" wrapText="true"/>
+    </TitledPane>
+</VBox>

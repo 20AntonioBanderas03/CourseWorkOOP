@@ -6,13 +6,14 @@ import java.util.List;
 
 public class ReportingService {
 
-    public static String generateReceipt(PersonalAccount account, List<Service> services, YearMonth period) {
+    public static String generateReceipt(int apartmentId, String ownerName, List<Service> services, BigDecimal debtBefore, BigDecimal debtAfter) {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n════════════════════════════════\n");
+        sb.append("\n═══════════════════════════════════════\n");
         sb.append("         КВИТАНЦИЯ ОПЛАТЫ ЖКУ\n");
-        sb.append("════════════════════════════════\n");
-        sb.append("Период: ").append(period).append("\n");
-        sb.append("Лицевой счет: №").append(account.getId()).append("\n");
+        sb.append("═══════════════════════════════════════\n");
+        sb.append("Период: ").append(YearMonth.now()).append("\n");
+        sb.append("Квартира №").append(apartmentId).append("\n");
+        sb.append("Собственник: ").append(ownerName).append("\n");
         sb.append("--------------------------------------\n");
         sb.append("Услуга                     Сумма (руб)\n");
         sb.append("--------------------------------------\n");
@@ -25,15 +26,20 @@ public class ReportingService {
         }
 
         sb.append("--------------------------------------\n");
-        sb.append(String.format("%-24s %10.2f\n", "ИТОГО:", total));
-        sb.append(String.format("%-24s %10.2f\n", "Долг на начало:", account.getBalance().subtract(total)));
-        sb.append(String.format("%-24s %10.2f\n", "Долг на конец:", account.getBalance()));
-        sb.append("════════════════════════════════\n");
+        sb.append(String.format("%-24s %10.2f\n", "ИТОГО К ОПЛАТЕ:", total));
+        sb.append(String.format("%-24s %10.2f\n", "Долг ДО:", debtBefore));
+        sb.append(String.format("%-24s %10.2f\n", "Долг ПОСЛЕ:", debtAfter));
+        sb.append("═══════════════════════════════════════\n");
         return sb.toString();
     }
 
-    public static String generateShortReport(PersonalAccount account) {
-        return String.format("Лицевой счет №%d | Баланс: %.2f руб | Долг: %.2f руб",
-                account.getId(), account.getBalance(), account.getDebt());
+    public static String getDebtString(BigDecimal debt) {
+        if (debt.compareTo(BigDecimal.ZERO) < 0) {
+            return String.format("Переплата: %.2f руб", debt.abs());
+        } else if (debt.compareTo(BigDecimal.ZERO) > 0) {
+            return String.format("Долг: %.2f руб", debt);
+        } else {
+            return "Задолженности нет";
+        }
     }
 }

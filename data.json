@@ -1,0 +1,43 @@
+{
+  "nextApartmentId": 4,
+  "nextUserId": 3,
+  "accounts": [
+    {
+      "apartmentId": 2,
+      "debt": 3546.7
+    },
+    {
+      "apartmentId": 1,
+      "debt": -62.15
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "login": "admin",
+      "password": "admin",
+      "role": "ADMIN"
+    },
+    {
+      "id": 2,
+      "login": "admin1",
+      "password": "admin1",
+      "role": "USER",
+      "apartmentId": 1
+    }
+  ],
+  "apartments": [
+    {
+      "number": 1.0,
+      "area": 45.5,
+      "residentsCount": 3.0,
+      "ownerName": "Иванов Иван Иванович"
+    },
+    {
+      "number": 2.0,
+      "area": 68.2,
+      "residentsCount": 2.0,
+      "ownerName": "Петров Петр Петрович"
+    }
+  ]
+}

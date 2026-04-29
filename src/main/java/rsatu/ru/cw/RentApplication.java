@@ -9,12 +9,10 @@ public class RentApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("rent-view.fxml"));
-        Scene scene = new Scene(loader.load(), 600, 800);
-        primaryStage.setTitle("Система расчёта квартплаты");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/rsatu/ru/cw/login.fxml"));
+        Scene scene = new Scene(loader.load(), 500, 400);
+        primaryStage.setTitle("Система расчёта квартплаты - Вход");
         primaryStage.setScene(scene);
-        primaryStage.setMinWidth(500);
-        primaryStage.setMinHeight(650);
         primaryStage.show();
     }
 
@@ -22,10 +20,3 @@ public class RentApplication extends Application {
         launch(args);
     }
 }
-
-//TODO: Добавить шрифты из ресурсов
-//TODO: Разобраться с программой
-//TODO: Добавить привилегии для разных ролей
-//TODO: Добавить добавить авторизацию юзеров
-//TODO: Добавить хранение данных о юзерах в файле
-// TODO: Добавить хравниние информации в лк пользователя

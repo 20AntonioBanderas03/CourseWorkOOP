@@ -1,45 +1,44 @@
 package rsatu.ru.cw;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 public class AccountingService {
-    private PersonalAccount account;
-    private List<Service> services;
+    private final DataService dataService;
 
-    public AccountingService(PersonalAccount account, List<Service> services) {
-        this.account = account;
-        this.services = services;
+    public AccountingService(DataService dataService) {
+        this.dataService = dataService;
     }
 
-    public BigDecimal calculateTotal() {
+    // Начисление для конкретной квартиры по услугам
+    public BigDecimal calculateForApartment(int apartmentId, List<Service> services) {
         BigDecimal total = BigDecimal.ZERO;
         for (Service s : services) {
-            BigDecimal amount = s.calculate();
-            total = total.add(amount);
-            System.out.printf("  - %s: %.2f руб%n", s.getName(), amount);
+            total = total.add(s.calculate());
         }
-        return total.setScale(2, RoundingMode.HALF_UP);
+        return total;
     }
 
-    public void applyCharges() {
-        BigDecimal total = calculateTotal();
-        account.addCharge(total);
-        System.out.printf("Итого начислено: %.2f руб%n", total);
+    // Применить начисление к долгу квартиры
+    public void applyCharge(int apartmentId, BigDecimal amount) {
+        PersonalAccount account = dataService.findAccountByApartmentId(apartmentId)
+                .orElse(new PersonalAccount(apartmentId, BigDecimal.ZERO));
+        account.addCharge(amount);
+        dataService.saveAccount(account);
     }
 
-    public void applyPayment(BigDecimal amount) {
+    // Применить платёж от жильца
+    public void applyPayment(int apartmentId, BigDecimal amount) {
+        PersonalAccount account = dataService.findAccountByApartmentId(apartmentId)
+                .orElse(new PersonalAccount(apartmentId, BigDecimal.ZERO));
         account.addPayment(amount);
-        System.out.printf("Принят платеж: %.2f руб. Текущий баланс: %.2f руб%n",
-                amount, account.getBalance());
+        dataService.saveAccount(account);
     }
 
-    public void showDebt() {
-        System.out.printf("Долг по лицевому счету №%d: %.2f руб%n",
-                account.getId(), account.getDebt());
+    // Получить текущий долг квартиры
+    public BigDecimal getDebt(int apartmentId) {
+        return dataService.findAccountByApartmentId(apartmentId)
+                .map(PersonalAccount::getDebt)
+                .orElse(BigDecimal.ZERO);
     }
-
-    public PersonalAccount getAccount() { return account; }
-    public List<Service> getServices() { return services; }
 }

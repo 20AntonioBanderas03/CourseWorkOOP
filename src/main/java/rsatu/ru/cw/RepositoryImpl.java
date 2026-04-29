@@ -25,5 +25,10 @@ class RepositoryImpl<T> implements Repository<T> {
     public void delete(int id) {
         storage.remove(id);
     }
+
+    @Override
+    public void update(T entity) {
+
+    }
 }
 

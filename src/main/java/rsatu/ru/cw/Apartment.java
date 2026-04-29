@@ -1,17 +1,25 @@
 package rsatu.ru.cw;
 
-class Apartment {
+public class Apartment {
     private int number;
     private double area;
-    private int personalAccountId;
+    private int residentsCount;
+    private String ownerName;
 
-    public Apartment(int number, double area, int personalAccountId) {
+    public Apartment(int number, double area, int residentsCount, String ownerName) {
         this.number = number;
         this.area = area;
-        this.personalAccountId = personalAccountId;
+        this.residentsCount = residentsCount;
+        this.ownerName = ownerName;
     }
 
+    // Геттеры и сеттеры
     public int getNumber() { return number; }
+    public void setNumber(int number) { this.number = number; }
     public double getArea() { return area; }
-    public int getPersonalAccountId() { return personalAccountId; }
+    public void setArea(double area) { this.area = area; }
+    public int getResidentsCount() { return residentsCount; }
+    public void setResidentsCount(int residentsCount) { this.residentsCount = residentsCount; }
+    public String getOwnerName() { return ownerName; }
+    public void setOwnerName(String ownerName) { this.ownerName = ownerName; }
 }

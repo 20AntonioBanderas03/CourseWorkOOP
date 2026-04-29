@@ -3,7 +3,7 @@ package rsatu.ru.cw;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-class MeteredService extends Service {
+public class MeteredService extends Service {
     private double currentReading;
     private double previousReading;
 
@@ -20,7 +20,7 @@ class MeteredService extends Service {
         return tariff.multiply(BigDecimal.valueOf(diff)).setScale(2, RoundingMode.HALF_UP);
     }
 
-    public void setCurrentReading(double currentReading) {
-        this.currentReading = currentReading;
-    }
+    public void setCurrentReading(double currentReading) { this.currentReading = currentReading; }
+    public double getCurrentReading() { return currentReading; }
+    public double getPreviousReading() { return previousReading; }
 }

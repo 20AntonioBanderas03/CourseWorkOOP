@@ -3,35 +3,35 @@ package rsatu.ru.cw;
 import java.math.BigDecimal;
 
 public class PersonalAccount {
-    private int id;
-    private BigDecimal balance;
-    private BigDecimal debt;
+    private int apartmentId;
+    private BigDecimal debt;  // положительный = долг, отрицательный = переплата
 
-    public PersonalAccount(int id) {
-        this.id = id;
-        this.balance = BigDecimal.ZERO;
-        this.debt = BigDecimal.ZERO;
+    public PersonalAccount(int apartmentId, BigDecimal debt) {
+        this.apartmentId = apartmentId;
+        this.debt = debt;
     }
 
+    public int getApartmentId() { return apartmentId; }
+    public void setApartmentId(int apartmentId) { this.apartmentId = apartmentId; }
+    public BigDecimal getDebt() { return debt; }
+    public void setDebt(BigDecimal debt) { this.debt = debt; }
+
     public void addCharge(BigDecimal amount) {
-        balance = balance.add(amount);
-        if (balance.compareTo(BigDecimal.ZERO) > 0) {
-            debt = balance;
-        } else {
-            debt = BigDecimal.ZERO;
-        }
+        debt = debt.add(amount);
     }
 
     public void addPayment(BigDecimal amount) {
-        balance = balance.subtract(amount);
-        if (balance.compareTo(BigDecimal.ZERO) > 0) {
-            debt = balance;
-        } else {
-            debt = BigDecimal.ZERO;
-        }
+        debt = debt.subtract(amount);
     }
 
-    public BigDecimal getBalance() { return balance; }
-    public BigDecimal getDebt() { return debt; }
-    public int getId() { return id; }
+    public boolean isOverpaid() {
+        return debt.compareTo(BigDecimal.ZERO) < 0;
+    }
+
+    public BigDecimal getOverpayment() {
+        if (isOverpaid()) {
+            return debt.abs();
+        }
+        return BigDecimal.ZERO;
+    }
 }
