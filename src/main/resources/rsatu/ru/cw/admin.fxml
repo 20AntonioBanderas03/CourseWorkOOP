@@ -40,7 +40,7 @@
         </GridPane>
     </TitledPane>
 
-    <TitledPane text="Квитанция" expanded="true" VBox.vgrow="ALWAYS">
+    <TitledPane text="Квитанция" expanded="true" VBox.vgrow="ALWAYS" maxHeight="Infinity" >
         <TextArea fx:id="receiptArea" editable="false" wrapText="true"/>
     </TitledPane>
 </VBox>

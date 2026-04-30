@@ -14,17 +14,6 @@
     <Label fx:id="apartmentLabel" style="-fx-font-size: 14px;"/>
     <Label fx:id="debtLabel" style="-fx-font-size: 14px; -fx-text-fill: red;"/>
 
-    <TitledPane text="Показания счётчиков" expanded="true">
-        <GridPane hgap="10" vgap="10">
-            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
-            <Label text="Электричество (кВт·ч):" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-            <TextField fx:id="electricityReading" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-            <Label text="Холодная вода (м³):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <TextField fx:id="waterReading" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-            <Button text="Отправить показания" onAction="#handleSendReadings" GridPane.rowIndex="2" GridPane.columnSpan="2"/>
-        </GridPane>
-    </TitledPane>
-
     <TitledPane text="Оплата" expanded="true">
         <HBox spacing="10" alignment="CENTER_LEFT">
             <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
