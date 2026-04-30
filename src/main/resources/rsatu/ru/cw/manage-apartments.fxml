@@ -12,7 +12,6 @@
 
     <Label text="Управление квартирами" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
-    <!-- Таблица квартир -->
     <TableView fx:id="apartmentTable" prefHeight="250">
         <columns>
             <TableColumn fx:id="colNumber" text="№ квартиры" prefWidth="80"/>
