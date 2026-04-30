@@ -115,10 +115,8 @@ public class LoginController {
         alert.showAndWait();
     }
 
-    // В методе initialize() или register() добавить создание тестовых квартир
 
     private void initTestApartments() {
-        // Добавляем тестовые квартиры, если их нет
         if (dataService.getApartments().isEmpty()) {
             dataService.saveApartment(new Apartment(1, 45.5, 3, "Иванов Иван Иванович"));
             dataService.saveApartment(new Apartment(2, 68.2, 2, "Петров Петр Петрович"));

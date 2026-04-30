@@ -28,12 +28,10 @@ public class RentController {
         accountingService = new AccountingService(dataService);
         authService = new AuthService(dataService);
 
-        // Для теста - создаём тестовую квартиру, если её нет
         if (dataService.findApartmentByNumber(1).isEmpty()) {
             dataService.saveApartment(new Apartment(1, 45.5, 3, "Иванов И.И."));
         }
 
-        // Пробуем найти пользователя или создаём тестового
         Optional<User> userOpt = authService.login("test", "test");
         if (userOpt.isPresent()) {
             currentUser = userOpt.get();

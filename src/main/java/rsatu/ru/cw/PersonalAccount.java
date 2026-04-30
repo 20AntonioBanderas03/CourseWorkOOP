@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class PersonalAccount {
     private int apartmentId;
-    private BigDecimal debt;  // положительный = долг, отрицательный = переплата
+    private BigDecimal debt;
 
     public PersonalAccount(int apartmentId, BigDecimal debt) {
         this.apartmentId = apartmentId;

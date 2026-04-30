@@ -17,7 +17,6 @@ public class Meter<T extends Number> {
         return currentReading.doubleValue() - previousReading.doubleValue();
     }
 
-    // Геттеры и сеттеры
     public int getId() { return id; }
     public T getCurrentReading() { return currentReading; }
     public void setCurrentReading(T currentReading) { this.currentReading = currentReading; }

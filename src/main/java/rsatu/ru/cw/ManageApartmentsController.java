@@ -31,7 +31,6 @@ public class ManageApartmentsController {
 
     @FXML
     public void initialize() {
-        // Настройка колонок таблицы
         colNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
         colArea.setCellValueFactory(new PropertyValueFactory<>("area"));
         colResidents.setCellValueFactory(new PropertyValueFactory<>("residentsCount"));
@@ -40,7 +39,6 @@ public class ManageApartmentsController {
 
         apartmentTable.setItems(tableData);
 
-        // Обработчик выбора строки в таблице
         apartmentTable.getSelectionModel().selectedItemProperty().addListener((obs, old, selected) -> {
             if (selected != null) {
                 selectedApartment = selected;
@@ -118,7 +116,6 @@ public class ManageApartmentsController {
             return;
         }
 
-        // Проверка на наличие долга
         BigDecimal debt = accountingService.getDebt(selectedApartment.getNumber());
         if (debt.compareTo(BigDecimal.ZERO) != 0) {
             showAlert("Ошибка", "Нельзя удалить квартиру с долгом или переплатой!\n" +
@@ -126,7 +123,6 @@ public class ManageApartmentsController {
             return;
         }
 
-        // Проверка на наличие зарегистрированного пользователя
         boolean hasUser = dataService.getUsers().stream()
                 .anyMatch(u -> u.getApartmentId() != null && u.getApartmentId() == selectedApartment.getNumber());
         if (hasUser) {
@@ -142,9 +138,7 @@ public class ManageApartmentsController {
         Optional<ButtonType> result = confirm.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            // Удаляем квартиру
             dataService.deleteApartment(selectedApartment.getNumber());
-            // Удаляем лицевой счёт
             dataService.deleteAccount(selectedApartment.getNumber());
             loadApartments();
             clearFields();
@@ -155,7 +149,6 @@ public class ManageApartmentsController {
     @FXML
     private void handleSave() {
         try {
-            // Проверка ввода
             String numberStr = numberField.getText();
             String areaStr = areaField.getText();
             String residentsStr = residentsField.getText();
@@ -178,7 +171,6 @@ public class ManageApartmentsController {
             Optional<Apartment> existingApt = dataService.findApartmentByNumber(number);
 
             if (selectedApartment == null) {
-                // ДОБАВЛЕНИЕ новой квартиры
                 if (existingApt.isPresent()) {
                     showAlert("Ошибка", "Квартира с номером " + number + " уже существует!");
                     return;
@@ -187,14 +179,12 @@ public class ManageApartmentsController {
                 Apartment newApartment = new Apartment(number, area, residents, ownerName);
                 dataService.saveApartment(newApartment);
 
-                // Создаём лицевой счёт для новой квартиры
                 dataService.saveAccount(new PersonalAccount(number, BigDecimal.ZERO));
 
                 statusLabel.setText("Квартира №" + number + " добавлена!");
                 loadApartments();
                 clearFields();
             } else {
-                // РЕДАКТИРОВАНИЕ существующей квартиры
                 if (existingApt.isPresent() && existingApt.get().getNumber() != selectedApartment.getNumber()) {
                     showAlert("Ошибка", "Квартира с номером " + number + " уже существует!");
                     return;
@@ -228,7 +218,6 @@ public class ManageApartmentsController {
         alert.showAndWait();
     }
 
-    // Внутренний класс для отображения в таблице
     public static class ApartmentTableRow {
         private final int number;
         private final double area;

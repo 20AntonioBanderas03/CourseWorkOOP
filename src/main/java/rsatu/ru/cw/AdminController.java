@@ -86,7 +86,6 @@ public class AdminController {
             if (aptOpt.isEmpty()) return;
             Apartment apt = aptOpt.get();
 
-            // Создаём услуги с показаниями
             MeteredService electricService = new MeteredService("Электричество", BigDecimal.valueOf(5.80), "кВт*ч", electricity, 0);
             MeteredService waterService = new MeteredService("Холодная вода", BigDecimal.valueOf(45.00), "м³", water, 0);
             NormativeService heatingService = new NormativeService("Отопление", BigDecimal.valueOf(25.50), "кв.м", 0, apt.getArea());
@@ -154,7 +153,6 @@ public class AdminController {
             stage.setScene(scene);
             stage.showAndWait();
 
-            // После закрытия окна обновляем таблицу
             loadApartments();
         } catch (Exception e) {
             e.printStackTrace();

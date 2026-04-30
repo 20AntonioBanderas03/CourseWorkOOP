@@ -4,8 +4,8 @@ public class User {
     private int id;
     private String login;
     private String password;
-    private String role;      // "ADMIN" или "USER"
-    private Integer apartmentId;  // null для админа
+    private String role;
+    private Integer apartmentId;
 
     public User(int id, String login, String password, String role, Integer apartmentId) {
         this.id = id;
@@ -15,7 +15,6 @@ public class User {
         this.apartmentId = apartmentId;
     }
 
-    // Геттеры и сеттеры
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public String getLogin() { return login; }

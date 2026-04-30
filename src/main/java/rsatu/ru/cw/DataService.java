@@ -34,7 +34,6 @@ public class DataService {
             data = gson.fromJson(reader, type);
             if (data == null) initEmptyData();
 
-            // Загружаем счётчики ID
             if (data.containsKey("nextUserId")) {
                 nextUserId = ((Double) data.get("nextUserId")).intValue();
             }
@@ -86,7 +85,6 @@ public class DataService {
         }
     }
 
-    // === РАБОТА С ПОЛЬЗОВАТЕЛЯМИ ===
     public List<User> getUsers() {
         Type type = new TypeToken<ArrayList<User>>() {}.getType();
         List<User> users = gson.fromJson(gson.toJson(data.get("users")), type);
@@ -105,7 +103,6 @@ public class DataService {
         return getUsers().stream().filter(u -> u.getLogin().equals(login)).findFirst();
     }
 
-    // === РАБОТА С КВАРТИРАМИ ===
     public List<Apartment> getApartments() {
         Type type = new TypeToken<ArrayList<Apartment>>() {}.getType();
         List<Apartment> apartments = gson.fromJson(gson.toJson(data.get("apartments")), type);
@@ -124,7 +121,6 @@ public class DataService {
         return getApartments().stream().filter(a -> a.getNumber() == number).findFirst();
     }
 
-    // === РАБОТА С ЛИЦЕВЫМИ СЧЕТАМИ (ДОЛГАМИ) ===
     public List<PersonalAccount> getAccounts() {
         Type type = new TypeToken<ArrayList<PersonalAccount>>() {}.getType();
         List<PersonalAccount> accounts = gson.fromJson(gson.toJson(data.get("accounts")), type);
@@ -142,8 +138,6 @@ public class DataService {
     public Optional<PersonalAccount> findAccountByApartmentId(int apartmentId) {
         return getAccounts().stream().filter(a -> a.getApartmentId() == apartmentId).findFirst();
     }
-
-    // Добавить эти методы в класс DataService
 
     public void updateApartment(int number, double area, int residentsCount, String ownerName) {
         List<Apartment> apartments = getApartments();
