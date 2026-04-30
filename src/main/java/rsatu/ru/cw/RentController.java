@@ -69,7 +69,7 @@ public class RentController {
 
             BigDecimal total = BigDecimal.ZERO;
             for (Service s : services) {
-                total = total.add(s.calculate());
+                total = total.add((BigDecimal)s.calculate());
             }
 
             BigDecimal oldDebt = accountingService.getDebt(currentApartment.getNumber());

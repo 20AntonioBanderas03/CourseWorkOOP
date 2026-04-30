@@ -20,7 +20,7 @@ public class ReportingService {
 
         BigDecimal total = BigDecimal.ZERO;
         for (Service s : services) {
-            BigDecimal amount = s.calculate();
+            BigDecimal amount = (BigDecimal) s.calculate();
             total = total.add(amount);
             sb.append(String.format("%-24s %10.2f\n", s.getName(), amount));
         }

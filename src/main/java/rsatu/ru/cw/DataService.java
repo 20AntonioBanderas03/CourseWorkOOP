@@ -24,7 +24,7 @@ public class DataService {
     private void loadData() {
         File file = new File(DATA_FILE);
         if (!file.exists()) {
-            //initEmptyData();
+            initEmptyData();
             initTestData();
             saveData();
             return;

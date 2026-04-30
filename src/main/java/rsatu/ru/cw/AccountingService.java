@@ -13,7 +13,7 @@ public class AccountingService {
     public BigDecimal calculateForApartment(int apartmentId, List<Service> services) {
         BigDecimal total = BigDecimal.ZERO;
         for (Service s : services) {
-            total = total.add(s.calculate());
+            total = total.add((BigDecimal) s.calculate());
         }
         return total;
     }
