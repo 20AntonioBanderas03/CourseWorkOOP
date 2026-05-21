@@ -8,6 +8,22 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="rsatu.ru.cw.ResidentController">
 
+    <MenuBar>
+        <menus>
+            <Menu text="Действия">
+                <items>
+                    <Menu text="Показать сведения">
+                        <items>
+                            <MenuItem text="Об авторе" onAction="#handleAboutAuthor"/>
+                            <MenuItem text="Об аккаунте" onAction="#handleAboutAccount"/>
+                        </items>
+                    </Menu>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Выход" onAction="#handleExit"/>
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
     <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
 
     <Label text="Личный кабинет жильца" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
@@ -36,6 +52,7 @@
 
     <HBox spacing="10">
         <Button text="Показать состояние" onAction="#handleShowReceipt"/>
+        <Button text="Показать состояние(всплывающее окно)" onAction="#handleShowReceiptPopup"/>
     </HBox>
 
     <TitledPane text="Информация" expanded="true" VBox.vgrow="ALWAYS">
