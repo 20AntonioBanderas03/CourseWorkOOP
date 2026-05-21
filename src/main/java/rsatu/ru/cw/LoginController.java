@@ -1,9 +1,11 @@
 package rsatu.ru.cw;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
@@ -11,6 +13,10 @@ import java.util.Optional;
 
 public class LoginController {
 
+    public VBox loginPanel;
+    public VBox registerPanel;
+    public Button loginButton;
+    public Button registerButton;
     @FXML private TextField loginField;
     @FXML private PasswordField passwordField;
     @FXML private TextField regLoginField;
@@ -25,6 +31,27 @@ public class LoginController {
     public void initialize() {
         dataService = new DataService();
         authService = new AuthService(dataService);
+        showLoginPanel();
+    }
+
+    private void showLoginPanel() {
+        loginPanel.setVisible(true);
+        loginPanel.setManaged(true);
+        registerPanel.setVisible(false);
+        registerPanel.setManaged(false);
+
+        loginButton.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px; -fx-padding: 12 0 12 0; -fx-cursor: hand; -fx-background-radius: 12 0 0 0;");
+        registerButton.setStyle("-fx-background-color: #ffcdd2; -fx-text-fill: #c62828; -fx-font-weight: bold; -fx-font-size: 15px; -fx-padding: 12 0 12 0; -fx-cursor: hand; -fx-background-radius: 0 12 0 0;");
+    }
+
+    private void showRegisterPanel() {
+        registerPanel.setVisible(true);
+        registerPanel.setManaged(true);
+        loginPanel.setVisible(false);
+        loginPanel.setManaged(false);
+
+        registerButton.setStyle("-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px; -fx-padding: 12 0 12 0; -fx-cursor: hand; -fx-background-radius: 0 12 0 0;");
+        loginButton.setStyle("-fx-background-color: #ffcdd2; -fx-text-fill: #c62828; -fx-font-weight: bold; -fx-font-size: 15px; -fx-padding: 12 0 12 0; -fx-cursor: hand; -fx-background-radius: 12 0 0 0;");
     }
 
     @FXML
@@ -79,6 +106,16 @@ public class LoginController {
         }
     }
 
+    @FXML
+    public void switchToLogin(ActionEvent actionEvent) {
+        showLoginPanel();
+    }
+
+    @FXML
+    public void switchToRegister(ActionEvent actionEvent) {
+        showRegisterPanel();
+    }
+    
     private void openMainWindow(User user) {
         try {
             Stage stage = (Stage) loginField.getScene().getWindow();
