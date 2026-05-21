@@ -52,6 +52,14 @@ public class ResidentController {
     }
 
     @FXML
+    private void handleSendReadings() {
+        if (currentApartment == null) return;
+        showAlert("Информация", "Показания отправлены администратору.\nОжидайте начисления.");
+        electricityReading.clear();
+        waterReading.clear();
+    }
+
+    @FXML
     private void handlePay() {
         try {
             BigDecimal amount = new BigDecimal(paymentAmount.getText());
@@ -79,12 +87,12 @@ public class ResidentController {
         if (currentApartment == null) return;
         BigDecimal currentDebt = accountingService.getDebt(currentUser.getApartmentId());
         receiptArea.setText(String.format("""
-                ════════════════════════════════
+                ═══════════════════════════════════════
                       ТЕКУЩЕЕ СОСТОЯНИЕ
-                ════════════════════════════════
+                ═══════════════════════════════════════
                 Квартира №%d (%s)
                 %s
-                ════════════════════════════════
+                ═══════════════════════════════════════
                 """, currentApartment.getNumber(), currentApartment.getOwnerName(), ReportingService.getDebtString(currentDebt)));
     }
 
