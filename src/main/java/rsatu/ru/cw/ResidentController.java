@@ -58,10 +58,8 @@ public class ResidentController {
     private void handlePay() {
         try {
             BigDecimal amount = new BigDecimal(paymentAmount.getText());
-            if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-                showAlert("Ошибка", "Сумма платежа должна быть положительной!");
-                return;
-            }
+            if (amount.compareTo(BigDecimal.ZERO) <= 0)
+                throw new InvalidInputException("Ошибка! Сумма платежа должна быть положительной...");
 
             BigDecimal oldDebt = accountingService.getDebt(currentUser.getApartmentId());
             accountingService.applyPayment(currentUser.getApartmentId(), amount);
@@ -74,6 +72,8 @@ public class ResidentController {
 
         } catch (NumberFormatException e) {
             showAlert("Ошибка", "Введите корректную сумму платежа!");
+        } catch (InvalidInputException e){
+            showAlert("Ошибка", "Сумма платежа должна быть положительной!");
         }
     }
 
