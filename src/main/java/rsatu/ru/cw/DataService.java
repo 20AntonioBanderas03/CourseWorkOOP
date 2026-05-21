@@ -77,10 +77,11 @@ public class DataService {
 
     private void initDefaultAdmin() {
         List<User> users = getUsers();
-        boolean adminExists = users.stream().anyMatch(u -> "ADMIN".equals(u.getRole()));
+        boolean adminExists = users.stream().anyMatch(u -> Roles.ADMIN.toString().equals(u.getRole()));
         if (!adminExists) {
-            User admin = new User(nextUserId++, "admin", "admin", "ADMIN", null);
+            User admin = new User(nextUserId++, "admin", "admin", Roles.ADMIN.toString(), null);
             users.add(admin);
+            saveUser(admin);
             saveData();
         }
     }
