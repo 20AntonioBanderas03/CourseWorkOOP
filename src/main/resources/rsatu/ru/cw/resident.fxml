@@ -32,7 +32,6 @@
     <Label fx:id="apartmentLabel" style="-fx-font-size: 14px; -fx-text-fill: #424242; -fx-background-color: #ffebee; -fx-padding: 8; -fx-background-radius: 6;"/>
     <Label fx:id="debtLabel" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #d32f2f; -fx-background-color: #ffebee; -fx-padding: 8; -fx-background-radius: 6;"/>
 
-    <!-- Стилизованный TitledPane -->
     <TitledPane text="📊 Показания счётчиков" expanded="true" style="-fx-background-color: transparent;">
         <style>
             .titled-pane {
@@ -82,7 +81,7 @@
     <HBox spacing="10" alignment="CENTER">
         <Button text="📋 Показать состояние" onAction="#handleShowReceipt"
                 style="-fx-background-color: #ffcdd2; -fx-text-fill: #c62828; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 15; -fx-cursor: hand;"/>
-        <Button text="🪟 Показать состояние (всплывающее)" onAction="#handleShowReceiptPopup"
+        <Button text="📋 Показать состояние (всплывающее)" onAction="#handleShowReceiptPopup"
                 style="-fx-background-color: #ffcdd2; -fx-text-fill: #c62828; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 15; -fx-cursor: hand;"/>
     </HBox>
 

@@ -159,11 +159,11 @@ public class ResidentController {
         );
 
         textContent.setText(formattedText);
-        textContent.setPrefSize(400, 150);
+        textContent.setPrefSize(300, 150);
 
         Button closeButton = new Button("Закрыть");
         closeButton.setStyle("""
-        -fx-background-color: #2196F3;
+        -fx-background-color: #d32f2f;
         -fx-text-fill: white;
         -fx-font-weight: bold;
         -fx-padding: 5 15;
@@ -173,9 +173,9 @@ public class ResidentController {
         VBox content = new VBox(10);
         content.setStyle("""
         -fx-background-color: white;
-        -fx-border-color: #4CAF50;
+        -fx-border-color: #d32f2f;
         -fx-border-width: 2;
-        -fx-border-radius: 5;
+        -fx-border-radius: 1;
         -fx-padding: 10;
         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);
         """);

@@ -123,7 +123,7 @@ public class LoginController {
 
             if ("ADMIN".equals(user.getRole())) {
                 loader = new FXMLLoader(getClass().getResource("/rsatu/ru/cw/admin.fxml"));
-                Scene scene = new Scene(loader.load(), 700, 500);
+                Scene scene = new Scene(loader.load(), 700, 780);
                 AdminController controller = loader.getController();
                 controller.setDataService(dataService);
                 controller.setCurrentUser(user);
@@ -131,7 +131,7 @@ public class LoginController {
                 stage.setScene(scene);
             } else {
                 loader = new FXMLLoader(getClass().getResource("/rsatu/ru/cw/resident.fxml"));
-                Scene scene = new Scene(loader.load(), 600, 550);
+                Scene scene = new Scene(loader.load(), 700, 780);
                 ResidentController controller = loader.getController();
                 controller.setDataService(dataService);
                 controller.setCurrentUser(user);
