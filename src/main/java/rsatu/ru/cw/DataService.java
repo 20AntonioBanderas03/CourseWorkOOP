@@ -158,6 +158,12 @@ public class DataService {
         data.put("apartments", apartments);
         saveData();
     }
+    public void deleteApartment(Apartment apartment) {
+        List<Apartment> apartments = getApartments();
+        apartments.removeIf(a -> a.getNumber() == apartment.getNumber());
+        data.put("apartments", apartments);
+        saveData();
+    }
 
     public void deleteAccount(int apartmentId) {
         List<PersonalAccount> accounts = getAccounts();
@@ -165,4 +171,13 @@ public class DataService {
         data.put("accounts", accounts);
         saveData();
     }
+
+    public void deleteAccount(PersonalAccount account) {
+        List<PersonalAccount> accounts = getAccounts();
+        accounts.removeIf(a -> a.getApartmentId() == account.getApartmentId());
+        data.put("accounts", accounts);
+        saveData();
+    }
+
+
 }
