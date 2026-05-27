@@ -64,7 +64,7 @@ public class ResidentController {
         try {
             BigDecimal amount = new BigDecimal(paymentAmount.getText());
             if (amount.compareTo(BigDecimal.ZERO) <= 0)
-                throw new InvalidInputException("Ошибка! Сумма платежа должна быть положительной...");
+                throw new InvalidInputException("Сумма платежа должна быть положительной...");
 
             BigDecimal oldDebt = accountingService.getDebt(currentUser.getApartmentId());
             accountingService.applyPayment(currentUser.getApartmentId(), amount);
@@ -78,7 +78,7 @@ public class ResidentController {
         } catch (NumberFormatException e) {
             showAlert("Ошибка", "Введите корректную сумму платежа!");
         } catch (InvalidInputException e){
-            showAlert("Ошибка", "Сумма платежа должна быть положительной!");
+            showAlert("Ошибка", e.getMessage());
         }
     }
 
