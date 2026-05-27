@@ -22,7 +22,6 @@ public class LoginController {
     @FXML private TextField regLoginField;
     @FXML private PasswordField regPasswordField;
     @FXML private TextField regApartmentField;
-    @FXML private TabPane tabPane;
 
     private DataService dataService;
     private AuthService authService;
@@ -95,7 +94,6 @@ public class LoginController {
         boolean success = authService.register(login, password, apartmentNumber);
         if (success) {
             showAlert("Успех", "Регистрация прошла успешно! Теперь войдите.");
-            tabPane.getSelectionModel().select(0);
             loginField.clear();
             passwordField.clear();
             regLoginField.clear();
