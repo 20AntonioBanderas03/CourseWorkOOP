@@ -9,7 +9,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public class DataService {
-    private static final String DATA_FILE = "data.json";
+    private static final String DATA_FILE = "data.dll";
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     private Map<String, Object> data = new HashMap<>();
