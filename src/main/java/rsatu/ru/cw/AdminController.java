@@ -86,18 +86,26 @@ public class AdminController {
             Apartment apt = aptOpt.get();
 
             MeteredService electricService = new MeteredService("Электричество", BigDecimal.valueOf(5.80), "кВт*ч", electricity, 0);
+            Meter<Double> electricsMeter = new Meter<>(electricity, (double) 0);
+
             MeteredService waterService = new MeteredService("Холодная вода", BigDecimal.valueOf(45.00), "м³", water, 0);
+            Meter<Double> waterMeter = new Meter<>(water, (double) 0);
+
             NormativeService heatingService = new NormativeService("Отопление", BigDecimal.valueOf(25.50), "кв.м", 0, apt.getArea());
+            Meter<Double> heatingMeter = new Meter<>((double) 0, apt.getArea());
+
             NormativeService sewerService = new NormativeService("Водоотведение", BigDecimal.valueOf(120.00), "чел", apt.getResidentsCount(), 0);
+            Meter<Double> sewerMeter = new Meter<>((double) apt.getResidentsCount(), (double) 0);
 
-            List<Service> services = List.of(heatingService, sewerService, electricService, waterService);
 
-            BigDecimal total = accountingService.calculateForApartment(selectedApartmentNumber, services);
+            List<ServiceMeterPairs> pairs = List.of(new ServiceMeterPairs(heatingService, heatingMeter), new ServiceMeterPairs(sewerService, sewerMeter), new ServiceMeterPairs(electricService, electricsMeter), new ServiceMeterPairs(waterService, waterMeter));
+
+            BigDecimal total = accountingService.calculateForApartment(selectedApartmentNumber, pairs);
             BigDecimal oldDebt = accountingService.getDebt(selectedApartmentNumber);
             accountingService.applyCharge(selectedApartmentNumber, total);
             BigDecimal newDebt = accountingService.getDebt(selectedApartmentNumber);
 
-            String receipt = ReportingService.generateReceipt(selectedApartmentNumber, apt.getOwnerName(), services, oldDebt, newDebt);
+            String receipt = ReportingService.generateReceipt(selectedApartmentNumber, apt.getOwnerName(), pairs, oldDebt, newDebt);
             receiptArea.setText(receipt);
 
             showAlert("Успех", String.format("Начислено %.2f руб для квартиры №%d", total, selectedApartmentNumber));

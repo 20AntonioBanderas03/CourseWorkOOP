@@ -10,10 +10,10 @@ public class AccountingService {
         this.dataService = dataService;
     }
 
-    public BigDecimal calculateForApartment(int apartmentId, List<Service> services) {
+    public BigDecimal calculateForApartment(int apartmentId, List<ServiceMeterPairs> pairs) {
         BigDecimal total = BigDecimal.ZERO;
-        for (Service s : services) {
-            total = total.add((BigDecimal) s.calculate());
+        for (ServiceMeterPairs p : pairs) {
+            total = total.add((BigDecimal) p.service().calculate(p.meter()));
         }
         return total;
     }

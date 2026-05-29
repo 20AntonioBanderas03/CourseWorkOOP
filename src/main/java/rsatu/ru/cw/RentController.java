@@ -57,19 +57,26 @@ public class RentController {
         }
 
         try {
-            double electricity = electricityReadingField.getText().isEmpty() ? 0 : Double.parseDouble(electricityReadingField.getText());
-            double water = waterReadingField.getText().isEmpty() ? 0 : Double.parseDouble(waterReadingField.getText());
+            Double electricity = electricityReadingField.getText().isEmpty() ? 0 : Double.parseDouble(electricityReadingField.getText());
+            Double water = waterReadingField.getText().isEmpty() ? 0 : Double.parseDouble(waterReadingField.getText());
 
             MeteredService electricService = new MeteredService("Электричество", BigDecimal.valueOf(5.80), "кВт*ч", electricity, 0);
-            MeteredService waterService = new MeteredService("Холодная вода", BigDecimal.valueOf(45.00), "м³", water, 0);
-            NormativeService heatingService = new NormativeService("Отопление", BigDecimal.valueOf(25.50), "кв.м", 0, currentApartment.getArea());
-            NormativeService sewerService = new NormativeService("Водоотведение", BigDecimal.valueOf(120.00), "чел", currentApartment.getResidentsCount(), 0);
+            Meter<Double> electricsMeter = new Meter<>(electricity, (double) 0);
 
-            List<Service> services = List.of(heatingService, sewerService, electricService, waterService);
+            MeteredService waterService = new MeteredService("Холодная вода", BigDecimal.valueOf(45.00), "м³", water, 0);
+            Meter<Double> waterMeter = new Meter<>(water, (double) 0);
+
+            NormativeService heatingService = new NormativeService("Отопление", BigDecimal.valueOf(25.50), "кв.м", 0, currentApartment.getArea());
+            Meter<Double> heatingMeter = new Meter<>((double) 0, currentApartment.getArea());
+
+            NormativeService sewerService = new NormativeService("Водоотведение", BigDecimal.valueOf(120.00), "чел", currentApartment.getResidentsCount(), 0);
+            Meter<Double> sewerMeter = new Meter<>((double) currentApartment.getResidentsCount(), (double) 0);
+
+            List<ServiceMeterPairs> pairs = List.of(new ServiceMeterPairs(heatingService, heatingMeter), new ServiceMeterPairs(sewerService, sewerMeter), new ServiceMeterPairs(electricService, electricsMeter), new ServiceMeterPairs(waterService, waterMeter));
 
             BigDecimal total = BigDecimal.ZERO;
-            for (Service s : services) {
-                total = total.add((BigDecimal)s.calculate());
+            for (ServiceMeterPairs p : pairs) {
+                total = total.add((BigDecimal)p.service().calculate(p.meter()));
             }
 
             BigDecimal oldDebt = accountingService.getDebt(currentApartment.getNumber());
@@ -79,7 +86,7 @@ public class RentController {
             String receipt = ReportingService.generateReceipt(
                     currentApartment.getNumber(),
                     currentApartment.getOwnerName(),
-                    services,
+                    pairs,
                     oldDebt,
                     newDebt
             );

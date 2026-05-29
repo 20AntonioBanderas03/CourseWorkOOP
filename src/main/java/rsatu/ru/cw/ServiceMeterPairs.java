@@ -1,4 +1,3 @@
 package rsatu.ru.cw;
 
-public record ServiceMeterPairs() {
-}
+public record ServiceMeterPairs(Service service, Meter meter) {}

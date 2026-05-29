@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ReportingService {
 
-    public static String generateReceipt(int apartmentId, String ownerName, List<Service> services, BigDecimal debtBefore, BigDecimal debtAfter) {
+    public static String generateReceipt(int apartmentId, String ownerName, List<ServiceMeterPairs> pairs, BigDecimal debtBefore, BigDecimal debtAfter) {
         StringBuilder sb = new StringBuilder();
         sb.append("\n════════════════════════════════\n");
         sb.append("         КВИТАНЦИЯ ОПЛАТЫ ЖКУ\n");
@@ -19,10 +19,10 @@ public class ReportingService {
         sb.append("--------------------------------------------\n");
 
         BigDecimal total = BigDecimal.ZERO;
-        for (Service s : services) {
-            BigDecimal amount = (BigDecimal) s.calculate();
+        for (ServiceMeterPairs p : pairs) {
+            BigDecimal amount = (BigDecimal) p.service().calculate(p.meter());
             total = total.add(amount);
-            sb.append(String.format("%-24s %10.2f\n", s.getName(), amount));
+            sb.append(String.format("%-24s %10.2f\n", p.service().getName(), amount));
         }
 
         sb.append("--------------------------------------------\n");

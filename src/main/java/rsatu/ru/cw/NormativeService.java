@@ -21,4 +21,14 @@ public class NormativeService extends Service {
         }
         return BigDecimal.ZERO;
     }
+
+    @Override
+    public Object calculate(Meter meter) {
+        if ("чел".equals(unit)) {
+            return tariff.multiply(BigDecimal.valueOf((Double) meter.getPreviousReading()));
+        } else if ("кв.м".equals(unit)) {
+            return tariff.multiply(BigDecimal.valueOf((Double) meter.getCurrentReading()));
+        }
+        return BigDecimal.ZERO;
+    }
 }

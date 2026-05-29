@@ -20,6 +20,13 @@ public class MeteredService extends Service {
         return tariff.multiply(BigDecimal.valueOf(diff)).setScale(2, RoundingMode.HALF_UP);
     }
 
+    @Override
+    public BigDecimal calculate(Meter meter) {
+        double diff = meter.getDifference();
+        if (diff < 0) diff = 0;
+        return tariff.multiply(BigDecimal.valueOf(diff)).setScale(2, RoundingMode.HALF_UP);
+    }
+
     public void setCurrentReading(double currentReading) { this.currentReading = currentReading; }
     public double getCurrentReading() { return currentReading; }
     public double getPreviousReading() { return previousReading; }
